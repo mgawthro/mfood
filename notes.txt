@@ -1,0 +1,27 @@
+install node js
+navigate to server in terminal (cd /MFood/server)
+
+run in terminal:
+npm install -g nodemon
+npm install
+
+to run a file run in terminal:
+node <filename>
+
+
+
+If you want to connect to database:
+
+create a mongoDB account
+text me your email and Ill give you permissions to the database
+create a file in the server folder called .env
+paste this into the file:
+
+MONGO_URI="mongodb+srv://dummyuser:dummyuser123@cluster0.wkogw3f.mongodb.net/?retryWrites=true&w=majority"
+PORT=4000
+
+go to the MongoDB website, press connect, connect to application, then follow those instructions
+add your ip address (should prompt you on mongo website)
+
+then run nodemon in terminal to start up server
+

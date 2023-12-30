@@ -1,0 +1,11 @@
+{
+    "name": "South Quad",
+    "nameID": "south",
+    "capacity": 50,
+    "hours": {
+        "breakfast": ["ISODate('2023-04-06T18:28:46Z')", "ISODate('2023-04-06T18:28:46Z')"],
+        "lunch": ["ISODate('2023-04-06T18:28:46Z')", "ISODate('2023-04-06T18:28:46Z')"],
+        "dinner": ["ISODate('2023-04-06T18:28:46Z')", "ISODate('2023-04-06T18:28:46Z')"]
+    },
+    "menu": { }
+}
