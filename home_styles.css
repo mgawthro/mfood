@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+.hall-list {
+	margin-top: 30px;
+  	display: flex;
+  	flex-wrap: wrap;
+ 	gap: 6px
+}
+
+.hall-item { 
+	width:236px;
+	height:236px;
+	border-top-left-radius:43px;
+	border-top-right-radius:43px;
+	border-bottom-left-radius:43px;
+	border-bottom-right-radius:43px;
+	text-align: center;
+}
+
+.hall-name {
+  font-weight: bold;
+  font-size: 37px;
+  color: var(--color-select);
+  margin-top:10%;
+}
+
+.hall-capacity {
+	font-weight: bold;
+	font-size: 45px;
+	color: var(--color-select);
+	margin-top: 5%;
+  }
+

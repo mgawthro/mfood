@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reviews</title>
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="review_styles.css" />
+    <!-- <script defer src="https://pyscript.net/latest/pyscript.js"></script> -->
+    <script>
+       const Refresh = async () => {
+            try {
+                const response = await fetch("http://localhost:4000/review");
+                const data = await response.json();
+
+               const example_reviews = 2;
+               //should be one once example is deleted
+
+                let rowCount = document.getElementById("review-list").childElementCount - 1 - example_reviews; 
+                for (let i = 0; i < rowCount; i++) {
+                    const victim = document.getElementById(`review-${i}`);
+                    victim.remove();
+                }
+
+                const hallCodeToText = {
+                    "south": "South Quad",
+                    "mojo": "Mojo",
+                    "markely": "Markely",
+                    "east": "East Quad",
+                    "north": "North Quad",
+                    "twigs": "Twigs at Oxford",
+                    "bursley": "Bursley",
+                }
+
+                for (let i = 0; i < data.length; i++) {
+                    const titleData = document.createElement("td");
+                    const ratingData = document.createElement("td");
+                    const hallData = document.createElement("td");
+
+                    const titleText = document.createTextNode(data[i].title);
+                    const ratingText = document.createTextNode(`${data[i].rating} Stars`);
+                    const hallText = document.createTextNode(hallCodeToText[data[i].dining_hall] || data[i].dining_hall);
+
+                    titleData.appendChild(titleText);
+                    titleData.setAttribute("class", "review-title")
+                    hallData.appendChild(hallText);
+                    hallData.setAttribute("class", "review-hall")
+                    ratingData.appendChild(ratingText);
+                    ratingData.setAttribute("class", "review-rating")
+
+                    const firstRow = document.createElement("tr");
+
+                    firstRow.appendChild(titleData);
+                    firstRow.appendChild(hallData);
+                    firstRow.appendChild(ratingData);
+                    
+
+                    const secondRow = document.createElement("tr");
+                    const reviewData = document.createElement("td")
+                    reviewData.setAttribute("colspan", "3");
+                    reviewData.setAttribute("class", "actualreview");
+                    reviewData.setAttribute("style", "padding-bottom:2%");
+                    const reviewText = document.createTextNode(data[i].body);
+
+                    reviewData.appendChild(reviewText);
+                    secondRow.appendChild(reviewData);
+
+                    const singleReviewTable = document.createElement("table")
+                    singleReviewTable.setAttribute("id", `review-${i}`);
+                    singleReviewTable.setAttribute("class", `review`);
+                    singleReviewTable.appendChild(firstRow);
+                    singleReviewTable.appendChild(secondRow);
+
+                    if ( i == 0) {
+                        const lastrow = document.getElementById("lastrow");
+                        const parentNode = lastrow.parentElement;
+                        parentNode.insertBefore(singleReviewTable, lastrow);
+                    } else {
+                        const latestReview = document.getElementById(`review-${i-1}`);
+                        const parentNode = lastrow.parentElement;
+                        parentNode.insertBefore(singleReviewTable, latestReview);
+                    }
+                    
+
+                }
+            } catch (err) {
+                console.log(err)
+            }
+       }
+    </script>
+</head>
+<body onload="Refresh()">
+    <div class="header">
+        <a href="home_page.html" style = "color:white"><h1>M-Food</h1></a>
+    </div>
+  <div class="topnav">
+    <a href="home_page.html">Home</a>
+    <a href="write_review.html">Write Review</a>
+    <a href="review_highlights.html">Reviews</a>
+   
+  </div>
+  <div style="margin-left:5%" class = "searchbar">
+    <input type="text" placeholder="Search..">
+    <a href="">Submit</a>
+  </div>
+    <div id="review-list" style="margin-left:5%;margin-right:5%">
+        <div id="lastrow"></div>
+        <table class="review" style = "border-bottom:solid" >
+            <tr>
+                <td class="review-title">Deli Cheese Shortage</td>
+                <td class="review-hall">South Quad</td>
+                <td class="review-rating">3 Stars</td>
+            </tr>
+            <tr>
+                <td style = "padding-bottom:2%" class = "actualreview" colspan="3">
+                    They ran out of pepper jack and provolone. Someone update if they have it again
+                </td>
+            </tr>
+            
+        </table>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <script src = "./main.js"></script>
+</body>
+</html>
